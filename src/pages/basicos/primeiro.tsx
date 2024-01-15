@@ -1,7 +1,7 @@
-export default function Primeiro() {
+import Primeiro from "@/components/basicos/Primeiro";
+
+export default function PrimeiraPagina() {
     return (
-        <div>
-            Primeiro Componente
-        </div>
+        <Primeiro />
     )
 }
