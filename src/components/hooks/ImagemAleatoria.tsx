@@ -25,13 +25,21 @@ export default function ImagemAleatoria() {
         <div className={`
             border border-zinc-500 p-7 rounded-md flex flex-col gap-3
         `}>
-            <Image src={`${url}${tamanho}x${tamanho}?${pesquisa}`} height={300} width={300} alt="Imagem" />
+            <div className="flex justify-center gap-7 mb-3">
+                <span>{pesquisa}</span>
+                <span>{tamanho}x{tamanho}</span>
+            </div>
+            <Image src={`${url}${tamanho}x${tamanho}?${pesquisa}`} 
+            height={300} width={300} 
+            alt="Imagem" 
+            className="rounded-md" 
+            />
             <div className="flex justify-between gap-5">
                 {renderizarBotao('abstract')}
                 {renderizarBotao('city')}
                 {renderizarBotao('person')}
             </div>
-            <div>
+            <div className="flex justify-center">
                 <input 
                     type="number" 
                     value={tamanho} 
