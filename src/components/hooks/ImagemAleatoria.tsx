@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function ImagemAleatoria() {
 
     const [pesquisa, alterarPesquisa] = useState<string>('abstract')
-    const [tamanho, alterarTamanho] = useState<number>(300)
+    const [tamanho, alterarTamanho] = useState<number>(300) 
     const url = 'https://source.unsplash.com/featured/'
 
     function renderizarBotao (valor: string) {
@@ -26,8 +26,8 @@ export default function ImagemAleatoria() {
             border border-zinc-500 p-7 rounded-md flex flex-col gap-3
         `}>
             <div className="flex justify-center gap-7 mb-3">
-                <span>{pesquisa}</span>
-                <span>{tamanho}x{tamanho}</span>
+                <span className="bg-purple-800 rounded-md p-2">{pesquisa}</span>
+                <span className="bg-purple-800 rounded-md p-2">{tamanho}x{tamanho}</span>
             </div>
             <Image src={`${url}${tamanho}x${tamanho}?${pesquisa}`} 
             height={300} width={300} 
