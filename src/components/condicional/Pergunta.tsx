@@ -1,6 +1,12 @@
 import { useState } from "react"
+import If from "./If"
 
-export default function Pergunta() {
+interface PerguntaProps {
+    pergunta: string
+    resposta: string
+}
+
+export default function Pergunta(props: PerguntaProps) {
     
     const [aberta, setAberta] = useState<boolean>(false)
 
@@ -11,14 +17,13 @@ export default function Pergunta() {
             border border-white rounded-md overflow-hidden
         `} onClick={() => setAberta(!aberta)}>
             <div className="bg-zinc-700 p-5 cursor-pointer select-none">
-                Pergunta
+                {props.pergunta}
             </div>
-            {aberta && (
+            <If teste={aberta} >
                 <div className="p-5 select-none">
-                    Resposta
+                    {props.resposta}
                 </div>
-            
-            )}
+            </If>
         </div>
     )
 }
