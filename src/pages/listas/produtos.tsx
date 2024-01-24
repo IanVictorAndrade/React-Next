@@ -1,4 +1,4 @@
-import ProdutoItems from "@/components/listas/ProdutoItem";
+import ListaProdutos from "@/components/listas/ListaProdutos";
 import produtos from "@/constants/produtos";
 
 export default function PaginaProdutos() {
@@ -9,7 +9,7 @@ export default function PaginaProdutos() {
         <div className={`
             flex flex-col justify-center items-center h-screen
         `}>
-            <ProdutoItems produto={produto} />
+            <ListaProdutos produtos={produtos} />
         </div>
     )
 }
