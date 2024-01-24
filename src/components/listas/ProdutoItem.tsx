@@ -4,6 +4,7 @@ import Image from "next/image";
 
 interface ProdutoItemsProps {
     produto: Produto
+    selecionar: (produto: Produto) => void
 }
 
 export default function ProdutoItems(props: ProdutoItemsProps) {
@@ -15,7 +16,7 @@ export default function ProdutoItems(props: ProdutoItemsProps) {
             border border-zinc-600 rounded-md
         `}>
             <Image src={produto.imagem} 
-            width={300} height={300} 
+            width={300} height={200}
             alt="ihhhhhhhhhh ala"
             className="rounded-md"
             />

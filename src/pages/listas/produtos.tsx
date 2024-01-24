@@ -1,9 +1,11 @@
 import ListaProdutos from "@/components/listas/ListaProdutos";
 import produtos from "@/constants/produtos";
+import ItemCarrinho from "@/model/ItemCarrinho";
+import { useState } from "react";
 
 export default function PaginaProdutos() {
 
-    const produto = produtos[0]
+    const [itens, setItens] = useState<ItemCarrinho[]>([])
 
     return (
         <div className={`
