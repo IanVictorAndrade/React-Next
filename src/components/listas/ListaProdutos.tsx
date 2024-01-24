@@ -3,7 +3,7 @@ import ProdutoItems from "./ProdutoItem"
 
 interface ListaProdutosProps {
     produtos: Produto[]
-
+    comprar: (produto: Produto) => void
 }
 
 export default function ListaProdutos (props: ListaProdutosProps) {
@@ -12,7 +12,7 @@ export default function ListaProdutos (props: ListaProdutosProps) {
         <div className="flex flex-wrap gap-3">
             {produtos.map(produto => {
                 return (
-                    <ProdutoItems key={produto.id} produto={produto} />
+                    <ProdutoItems key={produto.id} produto={produto} comprar={props.comprar} />
                 )
             })}
         </div>
