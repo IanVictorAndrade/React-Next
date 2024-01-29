@@ -16,15 +16,15 @@ export default function Personagens() {
     }
 
     return (
-        <div>
-            { processando ? (
+        <div className="flex flex-col gap-5 justify-center items-center">
+            <button onClick={obterPersonagens} className={"bg-blue-500 p-2"}>Obter Personagens</button>
+            {processando ? (
                 <div>Processando...</div>
             ) : personagens.length > 0 ? (
                     renderizarPersonagens()
                 ) :
                 <div>Nenhum personagem</div>
             }
-            <button onClick={obterPersonagens} className={"bg-blue-500 p-2"}>Obter Personagens</button>
         </div>
     )
 }
