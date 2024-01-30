@@ -2,22 +2,28 @@ import {useCallback, useEffect, useState} from "react";
 import useProcessando from "@/data/hooks/useProcessando";
 
 export default function useStarWars() {
-    const { processando, iniciarProcessamento, finalizarProcessamento } = useProcessando()
+    const {processando, iniciarProcessamento, finalizarProcessamento} = useProcessando()
     const [personagens, setPersonagens] = useState<any[]>([])
     const [personagem, setPersonagem] = useState<any[]>([])
     const [filmes, setFilmes] = useState<any[]>([])
 
     const obterFilmes = useCallback(async (personagem: any) => {
-        if (!personagem?.films.length) return
-        const reqs = personagem.films.map(async (film: string) => {
-            const resp = await fetch(film)
-            return resp.json()
-        })
+        if (!personagem?.films?.length) return
+        try {
+            iniciarProcessamento()
+            const reqs = personagem.films.map(async (film: string) => {
+                const resp = await fetch(film)
+                return resp.json()
+            })
 
-        const filmes = await Promise.all(reqs)
-        setFilmes(filmes)
-        console.log(filmes);
-    }, []);
+            const filmes = await Promise.all(reqs)
+            setFilmes(filmes)
+            console.log(filmes);
+        } finally {
+            finalizarProcessamento()
+        }
+
+    }, [iniciarProcessamento, finalizarProcessamento]);
 
     const obterPersonagens = useCallback(async () => {
         try {
