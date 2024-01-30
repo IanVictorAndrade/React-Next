@@ -1,30 +1,42 @@
 import useStarWars from "@/data/hooks/useStarWars";
+import {IconCheck} from "@tabler/icons-react";
 
-export default function Personagens() {
+interface PersonagemProps {
+    selecionar: (personagem: any) => void
+}
 
-    const { personagens, obterPersonagens, processando } = useStarWars()
+export default function Personagens(props: PersonagemProps) {
 
-    function renderizarPersonagens() {
-        return (
-            <ul>
-                { personagens.map((p: any) => (
-                        <li key={p.name}>{p.name}</li>
-                    )
-                )}
-            </ul>
-        )
-    }
+    const { personagens } = useStarWars()
 
     return (
-        <div className="flex flex-col gap-5 justify-center items-center">
-            <button onClick={obterPersonagens} className={"bg-blue-500 p-2"}>Obter Personagens</button>
-            {processando ? (
-                <div>Processando...</div>
-            ) : personagens.length > 0 ? (
-                    renderizarPersonagens()
-                ) :
-                <div>Nenhum personagem</div>
-            }
-        </div>
+        <table className="w-3/5 text-xl opacity-80 rounded-lg overflow-hidden">
+            <thead>
+                <tr className="bg-zinc-900">
+                    <th className="p-2 font-black">Nome</th>
+                    <th className="p-2 font-black">Altura</th>
+                    <th className="p-2 font-black">Peso</th>
+                    <th className="p-2 font-black">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                { personagens.map((p: any) => (
+                        <tr key={p.name} className={`
+                            text-center
+                            odd:bg-zinc-700 even:bg-zinc-800
+                            `}>
+                            <td className="p-2">{p.name}</td>
+                            <td className="p-2">{p.height}</td>
+                            <td className="p-2">{p.mass}</td>
+                            <td className="p-2">
+                                <button className="botao" onClick={() => props.selecionar(p)}>
+                                    <IconCheck size={20} />
+                                </button>
+                            </td>
+                        </tr>
+                    )
+                )}
+            </tbody>
+        </table>
     )
 }
