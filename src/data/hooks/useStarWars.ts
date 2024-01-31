@@ -4,7 +4,7 @@ import useProcessando from "@/data/hooks/useProcessando";
 export default function useStarWars() {
     const {processando, iniciarProcessamento, finalizarProcessamento} = useProcessando()
     const [personagens, setPersonagens] = useState<any[]>([])
-    const [personagem, setPersonagem] = useState<any[]>([])
+    const [personagem, setPersonagem] = useState<any>([])
     const [filmes, setFilmes] = useState<any[]>([])
 
     const obterFilmes = useCallback(async (personagem: any) => {
@@ -18,7 +18,6 @@ export default function useStarWars() {
 
             const filmes = await Promise.all(reqs)
             setFilmes(filmes)
-            console.log(filmes);
         } finally {
             finalizarProcessamento()
         }
@@ -37,6 +36,11 @@ export default function useStarWars() {
 
     }, [iniciarProcessamento, finalizarProcessamento]);
 
+    function voltar() {
+        setPersonagem(null)
+        setFilmes([])
+    }
+
     function selecionarPersonagem(personagem: any) {
         setPersonagem(personagem)
     }
@@ -53,6 +57,8 @@ export default function useStarWars() {
     return {
         personagens,
         processando,
+        filmes,
+        voltar,
         selecionarPersonagem
     }
 }

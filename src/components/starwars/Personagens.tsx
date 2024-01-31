@@ -1,14 +1,12 @@
 import useStarWars from "@/data/hooks/useStarWars";
 import {IconCheck} from "@tabler/icons-react";
 
-interface PersonagemProps {
+interface PersonagensProps {
+    personagens: any[]
     selecionar: (personagem: any) => void
 }
 
-export default function Personagens(props: PersonagemProps) {
-
-    const { personagens } = useStarWars()
-
+export default function Personagens(props: PersonagensProps) {
     return (
         <table className="w-3/5 text-xl opacity-80 rounded-lg overflow-hidden">
             <thead>
@@ -20,7 +18,7 @@ export default function Personagens(props: PersonagemProps) {
                 </tr>
             </thead>
             <tbody>
-                { personagens.map((p: any) => (
+                { props.personagens.map((p: any) => (
                         <tr key={p.name} className={`
                             text-center
                             odd:bg-zinc-700 even:bg-zinc-800
