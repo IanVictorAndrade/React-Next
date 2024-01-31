@@ -5,36 +5,34 @@ export default function useStarWars() {
     const {processando, iniciarProcessamento, finalizarProcessamento} = useProcessando()
     const [personagens, setPersonagens] = useState<any[]>([])
     const [personagem, setPersonagem] = useState<any>([])
-    const [filmes, setFilmes] = useState<any[]>([])
+    const [filmes, setFilmes] = useState<any>([])
 
-    const obterFilmes = useCallback(async (personagem: any) => {
-        if (!personagem?.films?.length) return
+    const obterFilmes = useCallback(async function (personagem: any) {
+        if(!personagem?.films?.length) return
         try {
             iniciarProcessamento()
             const reqs = personagem.films.map(async (film: string) => {
                 const resp = await fetch(film)
                 return resp.json()
             })
-
             const filmes = await Promise.all(reqs)
             setFilmes(filmes)
         } finally {
             finalizarProcessamento()
         }
+    }, [iniciarProcessamento, finalizarProcessamento])
 
-    }, [iniciarProcessamento, finalizarProcessamento]);
-
-    const obterPersonagens = useCallback(async () => {
+    const obterPersonagens = useCallback(async function () {
         try {
             iniciarProcessamento()
             const resp = await fetch('https://swapi.dev/api/people/')
-            const data = await resp.json()
-            setPersonagens(data.results)
+            const dados = await resp.json()
+            setPersonagens(dados.results)
         } finally {
             finalizarProcessamento()
         }
+    }, [iniciarProcessamento, finalizarProcessamento])
 
-    }, [iniciarProcessamento, finalizarProcessamento]);
 
     function voltar() {
         setPersonagem(null)

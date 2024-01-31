@@ -5,7 +5,7 @@ interface FilmeProps {
 
 export default function Filmes(props: FilmeProps) {
     return (
-        <div>
+        <div className="flex flex-col gap-5 items-center w-full">
             <button className="botao" onClick={props.voltar}>Voltar</button>
             <table className="w-3/5 text-xl opacity-80 rounded-lg overflow-hidden">
                 <thead>
