@@ -3,18 +3,13 @@ import ListaProdutos from "@/components/listas/ListaProdutos";
 import produtos from "@/constants/produtos";
 import ItemCarrinho from "@/model/ItemCarrinho";
 import Produto from "@/model/Produto";
-import { useState } from "react";
+import {useContext, useState} from "react";
+import Link from "next/link";
+import CarrinhoContexto from "@/data/contexts/CarrinhoContext";
 
 export default function PaginaProdutos() {
 
-    const [itens, setItens] = useState<ItemCarrinho[]>([])
-
-    function adicionarProduto(produto: Produto) {
-        const itemAtual = itens.find(item => item.produto.id === produto.id) ?? { quantidade: 0, produto: produto }
-        const novoItem = {...itemAtual, quantidade: itemAtual.quantidade + 1}
-        const outrosItens = itens.filter(item => item.produto.id !== produto.id)
-        setItens([...outrosItens, novoItem])
-    }
+    const { itens, adicionarProduto } = useContext(CarrinhoContexto)
 
     return (
         <div className={`
@@ -22,6 +17,9 @@ export default function PaginaProdutos() {
         `}>
             <Carrinho itens={itens}/>
             <ListaProdutos produtos={produtos} comprar={adicionarProduto}/>
+            <Link className="botao" href="/">
+                Voltar para a página inicial
+            </Link>
         </div>
     )
 }
